@@ -1,44 +1,44 @@
-# Strapi Heroku Deploy Button
+# How to run this boilerplate
 
-This repository contains a basic Strapi application which is quickly and easily deployable on Heroku through a one-click deploy button
+A tutorial on how to create cloudinary > accounts, install dependencies and run the project.
 
-<a href="https://www.heroku.com/deploy/?template=https://github.com/strapi/strapi-heroku-template">
-<img src="https://assets.strapi.io/uploads/Deploy_button_heroku_b1043fc67d.png" />
-</a>
+1. Install dependencies
+Run yarn install or npm install on both client and server folders, this command will install the project's dependencies.
 
-## Requirements
+2. Create cloudinary account
+Go to cloudinary images website and create an account.
 
-To deploy this project on Heroku, you'll need:
+Under the Account Details section is a url named API environment variable this is your cloudinary url.
 
-- An Heroku account (Free)
-- A Cloudinary account for hosting your assets (Free)
+3. Create a env file
+Create a file named .env and, inside of it, place this:
 
-## Database
+HOST=[HOST]
+PORT=[PORT]
 
-This project will use the [postgresql Heroku addons](https://elements.heroku.com/addons/heroku-postgresql). The database configuration can be found in the `config/database.js` file. Using the existing configuration means that you project will also use the production postgresql database when running locally on your machine. 
-You will need to have the same `DATABASE_URL` that the addon will create on your Heroku project if you want to use the postresql database locally.
+DATABASE_URL=[DATABASE_URL]
 
-  - Create an `.env` file at the root of your project containing the following code:
+CLOUDINARY_NAME=[CLOUDINARY_NAME]
+CLOUDINARY_KEY=[CLOUDINARY_KEY]
+CLOUDINARY_SECRET=[CLOUDINARY_SECRET]
+Where:
 
-```
-DATABASE_URL=...
-```
+[PORT] is which port you want the server to run on (usually 3001)
+[COOKIE_SECRET] is a random string used for authentication on the admin.
+[CLOUDINARY_URL] is the url you got from step 3.2
+5. Running in development
+To run this project in development mode, we will need to run two servers, the react one on /client and keystone on /server.
 
-If you want to use an SQLite database just for editing your collection-types, configurations locally on your machine, please comment the postgresql configuration in the `config/database.js` file and uncomment the SQLite one. 
-You can also create a `config/env/production/database.js` file containing the postgresql connection and only keep the SQLite connection in your `config/database.js`. This way you'll have two different database connection depending on the environment.
+The command to run react is yarn start or npm start depending on which tool was used on installation, the react server will run on port 3000 by default.
 
-## Upload
+Before running the keystone server, go to /server/updates/0.0.1-admin.js and change the admin user as you want, this user will be the first created, but you will be able to create others and delete this one later.
 
-This project will upload your assets on your Cloudinary account. The configuration can be found in the `config/plugins.js` file. Using the existing configuration means that you project will also use the cloudinary upload provider when running locally on your machine.
-You will need to have the same `CLOUDINARY_NAME`, `CLOUDINARY_KEY` and `CLOUDINARY_SECRET` variables in an `.env` file locally on your machine.
+To run keystoneJS server, use the command node index.js, the server will run on whatever port is in the variale in the env file, you will find the admin interface in http://localhost:[PORT]/admin
 
-  - Create an `.env` file at the root of your project containing the following code:
+6. Running in production
+To run the server in production, go to /client and run the command yarn server, this command will create a react production optimized build and move it to /server.
 
-```
-CLOUDINARY_NAME=...
-CLOUDINARY_KEY=...
-CLOUDINARY_SECRET=...
-```
+Then go to /server and run node index.js, you will find the project on http://localhost:[PORT]
 
-If you want to upload your assets on your computer when running locally on your machine, please comment the content of your `config/plugins.js` file. 
-You can also create a `config/env/production/plugins.js` file containing the cloudinary provider and delete your `config/plugins.js`. This way you'll have two different upload providers depending on the environment.
+Developed by Jorrmungandr
+This boilerplate was meant to be used in CITi's selective process on 2020.1, to help the development of onepage websites.
