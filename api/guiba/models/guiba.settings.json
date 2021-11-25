@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "guibas",
+  "info": {
+    "name": "guiba"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "foto": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
+    },
+    "texto": {
+      "type": "string"
+    },
+    "bool": {
+      "type": "boolean"
+    }
+  }
+}
